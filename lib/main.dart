@@ -9,6 +9,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  static Color creamColor = const Color(0xfff5f5f5);
+  static Color darkBluish = const Color(0xff403b58);
   const MyApp({super.key});
 
   @override
@@ -16,9 +18,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-            primarySwatch: Colors.deepPurple,
+            primaryColor: Colors.deepPurple,
             iconTheme: const IconThemeData(color: Colors.black),
-            fontFamily: GoogleFonts.lato().fontFamily,
+            fontFamily: GoogleFonts.poppins().fontFamily,
             appBarTheme: const AppBarTheme(color: Colors.white)),
         themeMode: ThemeMode.light,
         darkTheme: ThemeData(brightness: Brightness.dark),

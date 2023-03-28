@@ -1,12 +1,14 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:aziza/main.dart';
 import 'package:aziza/models/catalog.dart';
-import 'package:aziza/pages/widgets/drawer.dart';
-import 'package:aziza/pages/widgets/item_widget.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:velocity_x/velocity_x.dart';
+
+import 'widgets/home_widgets/catalog_header.dart';
+import 'widgets/home_widgets/catalog_list.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -23,6 +25,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   loaddata() async {
+    await Future.delayed(const Duration(seconds: 0));
     final catalogJson =
         await rootBundle.loadString("assets/files/catalogue.json");
     final decodeJson = jsonDecode(catalogJson);
@@ -36,31 +39,24 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     setState(() {});
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.white,
-            iconTheme: const IconThemeData(color: Colors.black),
-            centerTitle: true,
-            title: Text("Aziza",
-                style: TextStyle(
-                    fontFamily: GoogleFonts.lato().fontFamily,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25,
-                    color: Colors.black)),
-          ),
-          body: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: ListView.builder(
-              itemCount: CatalogModel.items.length,
-              itemBuilder: (BuildContext context, int index) {
-                return ItemWidget(
-                  item: CatalogModel.items[index],
-                );
-              },
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+          backgroundColor: MyApp.creamColor,
+          body: SafeArea(
+            child: Container(
+              padding: Vx.m32,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const CatalogHeader(),
+                  if (CatalogModel.items.isNotEmpty)
+                    const CatalogList().expand()
+                  else
+                    const CircularProgressIndicator().centered().expand(),
+                ],
+              ),
             ),
           ),
-          drawer: const Mydrawer()),
-    );
+        ));
   }
 }
