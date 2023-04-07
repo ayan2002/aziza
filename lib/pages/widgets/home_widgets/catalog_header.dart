@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:velocity_x/velocity_x.dart%20';
 import '../../../main.dart';

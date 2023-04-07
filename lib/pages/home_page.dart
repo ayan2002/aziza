@@ -2,6 +2,8 @@
 
 import 'package:aziza/main.dart';
 import 'package:aziza/models/catalog.dart';
+import 'package:aziza/utils/routes.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
@@ -41,6 +43,13 @@ class _HomePageState extends State<HomePage> {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Scaffold(
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              Navigator.pushNamed(context, MyRoutes.cartRoute);
+            },
+            backgroundColor: MyApp.darkBluish,
+            child: const Icon(CupertinoIcons.cart),
+          ),
           backgroundColor: MyApp.creamColor,
           body: SafeArea(
             child: Container(
